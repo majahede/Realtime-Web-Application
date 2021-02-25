@@ -1,10 +1,12 @@
 import express from 'express'
 import hbs from 'express-hbs'
+import http from 'http'
 import logger from 'morgan'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
 import { router } from './routes/router.js'
 import { connectDB } from './config/mongoose.js'
+import { Server } from 'socket.io'
 
 /**
  * The main function of the application.
@@ -16,7 +18,7 @@ const main = async () => {
 
     const directoryFullName = dirname(fileURLToPath(import.meta.url))
 
-    // const baseURL = process.env.BASE_URL || '/'
+    const baseURL = process.env.BASE_URL || '/'
 
     // Set up morgan logger.
     app.use(logger('dev'))
@@ -37,8 +39,32 @@ const main = async () => {
     // serve static files.
     app.use(express.static(join(directoryFullName, '..', 'public')))
 
+    // Add socket.io to Express project
+    const server = http.createServer(app)
+    const io = new Server(server)
+
+    // Log when user connect/disconnect
+    io.on('connection', (socket) => {
+      console.log('a user connected')
+
+      socket.on('disconnect', () => {
+        console.log('user disconnected')
+      })
+    })
+
     // register routes
     app.use('/', router)
+
+    // Middleware to be executed before the routes.
+    app.use((req, res, next) => {
+    // Pass the base URL to the views.
+      res.locals.baseURL = baseURL
+
+      // Add Socket.io to the Response-object to make it available in controllers.
+      res.io = io
+
+      next()
+    })
 
     // Error handler.
     app.use(function (err, req, res, next) {
@@ -57,7 +83,8 @@ const main = async () => {
       }
     })
 
-    app.listen(process.env.PORT, () => {
+    // Starts the HTTP server listening for connections.
+    server.listen(process.env.PORT, () => {
       console.log(`Server running now at http://localhost:${process.env.PORT}`)
     })
   } catch (err) {

@@ -20,9 +20,9 @@ export class IssuesController {
    */
   async index (req, res, next) {
     try {
-      const getIssues = await fetch('https://gitlab.lnu.se/api/v4/projects/12924/issues', {
+      const getIssues = await fetch(process.env.ISSUES_URL, {
         headers: {
-          Authorization: 'bearer jAZBEfpwGWMCgx5THg1B'
+          Authorization: process.env.BEARER
         }
       })
       const issues = await getIssues.json()

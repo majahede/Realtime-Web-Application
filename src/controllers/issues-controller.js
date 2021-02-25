@@ -5,6 +5,8 @@
  * @version 1.0.0
  */
 
+import fetch from 'node-fetch'
+
 /**
  * Encapsulates a controller.
  */
@@ -18,6 +20,14 @@ export class IssuesController {
    */
   async index (req, res, next) {
     try {
+      const getIssues = await fetch('https://gitlab.lnu.se/api/v4/projects/12924/issues', {
+        headers: {
+          Authorization: 'bearer jAZBEfpwGWMCgx5THg1B'
+        }
+      })
+      const issues = await getIssues.json()
+      console.log(issues[0].title)
+      console.log(issues[0].description)
       res.render('issues/index')
     } catch (error) {
       next(error)

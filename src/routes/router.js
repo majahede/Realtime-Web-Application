@@ -10,4 +10,4 @@ import { router as issuesRouter } from './issues-router.js'
 
 export const router = express.Router()
 
-router.use('/issues', issuesRouter)
+router.use('/', issuesRouter)

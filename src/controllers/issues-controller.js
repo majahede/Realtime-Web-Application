@@ -18,7 +18,7 @@ export class IssuesController {
    */
   async index (req, res, next) {
     try {
-      res.render('snippets/index')
+      res.render('issues/index')
     } catch (error) {
       next(error)
     }

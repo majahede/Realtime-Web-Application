@@ -3,4 +3,26 @@
 </h1>
 
 
+ <h1>
+  CRUD Snippets application
+</h1>
+
+<table>
+    <tbody>
+        {{#if viewData.issues}}
+        {{#each viewData.issues}}
+        
+        <tr>
+            <td><textarea name="title" readonly>{{this.title}}</textarea></td>
+            <td>
+                <a href="./{{this.id}}/edit"><span>Edit</span></a>
+            </td>
+        </tr>
+        {{/each}}
+        {{/if}}
+    </tbody>
+</table>
+
  
+
+    

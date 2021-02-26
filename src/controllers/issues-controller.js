@@ -29,13 +29,7 @@ export class IssuesController {
 
       const issues = await getIssues.json()
 
-      for (let i = 0; i < issues.length; i++) {
-        const issue = new Issue({
-          title: issues[i].title,
-          description: issues[i].description
-        })
-        await issue.save()
-      }
+      console.log(issues[0].title)
       res.render('issues/index')
     } catch (error) {
       next(error)

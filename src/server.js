@@ -52,9 +52,6 @@ const main = async () => {
       })
     })
 
-    // register routes
-    app.use('/', router)
-
     // Middleware to be executed before the routes.
     app.use((req, res, next) => {
     // Pass the base URL to the views.
@@ -65,6 +62,9 @@ const main = async () => {
 
       next()
     })
+
+    // register routes
+    app.use('/', router)
 
     // Error handler.
     app.use(function (err, req, res, next) {

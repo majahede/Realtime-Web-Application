@@ -2,20 +2,15 @@
   Real-time web application
 </h1>
 
-
- <h1>
-  CRUD Snippets application
-</h1>
-
 <table>
-    <tbody>
+    <tbody id="issue-list">
         {{#if viewData.issues}}
         {{#each viewData.issues}}
-        
         <tr>
             <td><textarea name="title" readonly>{{this.title}}</textarea></td>
             <td>
                 <a href="./{{this.id}}/edit"><span>Edit</span></a>
+                <a href="./{{this.id}}/remove"><span>Delete</span></a>
             </td>
         </tr>
         {{/each}}
@@ -23,6 +18,14 @@
     </tbody>
 </table>
 
- 
+
+<template id="issue-template">   
+    <td><textarea name="title" readonly>\{{this.title}}</textarea></td>
+    <td>
+        <a href="./\{{this.id}}/edit"><span>Edit</span></a>
+        <a href="./\{{this.id}}/remove"><span>Delete</span></a>
+    </td>
+</template>
+
 
     

@@ -6,6 +6,7 @@
  */
 
 import fetch from 'node-fetch'
+import { Issue } from '../models/issue.js'
 
 /**
  * Encapsulates a controller.
@@ -25,9 +26,16 @@ export class IssuesController {
           Authorization: process.env.BEARER
         }
       })
+
       const issues = await getIssues.json()
-      console.log(issues[0].title)
-      console.log(issues[0].description)
+
+      for (let i = 0; i < issues.length; i++) {
+        const issue = new Issue({
+          title: issues[i].title,
+          description: issues[i].description
+        })
+        await issue.save()
+      }
       res.render('issues/index')
     } catch (error) {
       next(error)

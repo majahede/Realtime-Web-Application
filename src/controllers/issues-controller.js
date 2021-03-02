@@ -83,6 +83,11 @@ export class IssuesController {
         id: issue._id
       })
 
+      if (req.headers['x-gitlab-event']) {
+        res.status(200).send('Hook accepted')
+        return
+      }
+
       res.redirect('.')
     } catch (error) {
       res.redirect('..')

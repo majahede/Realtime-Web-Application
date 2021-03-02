@@ -36,6 +36,8 @@ const main = async () => {
     // Populates the request object with a body object (req.body)
     app.use(express.urlencoded({ extended: false }))
 
+    app.use(express.json())
+
     // serve static files.
     app.use(express.static(join(directoryFullName, '..', 'public')))
 

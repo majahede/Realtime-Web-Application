@@ -14,11 +14,6 @@ const schema = new mongoose.Schema({
     required: true,
     trim: true,
     minlength: 1
-  },
-  description: {
-    type: String,
-    trim: true,
-    minlength: 1
   }
 }, {
   timestamps: true

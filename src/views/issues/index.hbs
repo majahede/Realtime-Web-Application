@@ -6,9 +6,21 @@
     <tbody id="issue-list">
         {{#if viewData}}
         {{#each viewData}}
-        <tr>
-            <td><p>{{this.title}}</p></td>
+        {{#if this.state}}
+        <tr id="nr{{this.iid}}">
+            <td><p>#{{this.iid}} {{this.title}}</p></td>
+            <td>
+                <a href=""><span>Reopen</span></a>
+            </td>
         </tr>
+        {{else}}
+        <tr id="nr{{this.iid}}">
+            <td><p>#{{this.iid}} {{this.title}}</p></td>
+            <td>
+                <a href=""><span>Close</span></a>
+            </td>
+        </tr>
+        {{/if}}
         {{/each}}
         {{/if}}
     </tbody>
@@ -16,7 +28,21 @@
 
 
 <template id="issue-template">   
-    <td><p>\{{this.title}}</p></td>
+      \{{#if this.state}}
+        <tr>
+            <td><p>#\{{this.iid}} \{{this.title}}</p></td>
+            <td>
+                <a href=""><span>Reopen</span></a>
+            </td>
+        </tr>
+        \{{else}}
+        <tr>
+            <td><p>#\{{this.iid}} \{{this.title}}</p></td>
+            <td>
+                <a href=""><span>Close</span></a>
+            </td>
+        </tr>
+      \{{/if}}
 </template>
 
 

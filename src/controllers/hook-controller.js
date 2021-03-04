@@ -21,7 +21,8 @@ export class HookController {
       title: req.body.object_attributes.title,
       description: req.body.object_attributes.description,
       iid: req.body.object_attributes.iid,
-      avatar: req.body.user.avatar_url
+      avatar: req.body.user.avatar_url,
+      state: req.body.object_attributes.closed_at
     }
 
     next()

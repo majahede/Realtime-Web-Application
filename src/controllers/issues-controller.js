@@ -32,7 +32,8 @@ export class IssuesController {
         title: issue.title,
         description: issue.description,
         iid: issue.iid,
-        avatar: issue.author.avatar_url
+        avatar: issue.author.avatar_url,
+        state: issue.closed_by
       }))
 
       res.render('issues/index', { viewData })
@@ -51,12 +52,20 @@ export class IssuesController {
   async create (req, res) {
     try {
       const issue = {
-        title: req.body.title
+        title: req.body.title,
+        description: req.body.description,
+        iid: req.body.iid,
+        avatar: req.avatar,
+        state: req.body.state
       }
 
       // Send the created issue to all subscribers.
       res.io.emit('issue', {
-        title: issue.title
+        title: issue.title,
+        description: issue.description,
+        iid: issue.iid,
+        avatar: issue.avatar,
+        state: issue.state
       })
 
       if (req.headers['x-gitlab-event']) {

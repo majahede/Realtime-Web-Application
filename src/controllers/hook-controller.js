@@ -1,7 +1,7 @@
 /**
  * Module for the HookController.
  *
- * @author Johan Leitet
+ * @author Maja Hedegärd
  * @version 1.0.0
  */
 
@@ -18,7 +18,10 @@ export class HookController {
    */
   index (req, res, next) {
     req.body = {
-      title: req.body.object_attributes.title
+      title: req.body.object_attributes.title,
+      description: req.body.object_attributes.description,
+      iid: req.body.object_attributes.iid,
+      avatar: req.body.user.avatar_url
     }
 
     next()

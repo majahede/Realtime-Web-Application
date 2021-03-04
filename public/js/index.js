@@ -17,6 +17,6 @@ if (issueTemplate) {
     tr.innerHTML = issueString
 
     const issueList = document.querySelector('#issue-list')
-    issueList.appendChild(tr)
+    issueList.prepend(tr)
   })
 }

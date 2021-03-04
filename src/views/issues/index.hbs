@@ -4,14 +4,10 @@
 
 <table>
     <tbody id="issue-list">
-        {{#if viewData.issues}}
-        {{#each viewData.issues}}
+        {{#if viewData}}
+        {{#each viewData}}
         <tr>
-            <td><textarea name="title" readonly>{{this.title}}</textarea></td>
-            <td>
-                <a href="./{{this.id}}/edit"><span>Edit</span></a>
-                <a href="./{{this.id}}/remove"><span>Delete</span></a>
-            </td>
+            <td><p>{{this.title}}</p></td>
         </tr>
         {{/each}}
         {{/if}}
@@ -20,11 +16,7 @@
 
 
 <template id="issue-template">   
-    <td><textarea name="title" readonly>\{{this.title}}</textarea></td>
-    <td>
-        <a href="./\{{this.id}}/edit"><span>Edit</span></a>
-        <a href="./\{{this.id}}/remove"><span>Delete</span></a>
-    </td>
+    <td><p>\{{this.title}}</p></td>
 </template>
 
 

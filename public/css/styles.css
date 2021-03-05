@@ -1,0 +1,9 @@
+tbody {
+  border-bottom: 2px solid black;
+
+}
+
+table {
+  border-collapse: collapse;
+  padding: 50px;
+}

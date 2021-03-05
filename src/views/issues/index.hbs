@@ -10,23 +10,34 @@
         <tr id="nr{{this.iid}}">
             <td><p>#{{this.iid}} {{this.title}}</p></td>
             <td>
-<form method="post" action="./{{this.iid}}/reopen">
- <input type="hidden" name="_method" value="put">
-<input type="hidden" name="id" value="{{this.iid}}" />
-  <button type="submit">Reopen</button>
-</form>
+              <form method="post" action="./{{this.iid}}/reopen">
+              <input type="hidden" name="_method" value="put">
+              <input type="hidden" name="id" value="{{this.iid}}" />
+                <button type="submit">Reopen</button>
+              </form>
             </td>
         </tr>
+        <tr>
+          <td><p>{{this.description}}</p></td>
+        </tr>
         {{else}}
+         <tr>
+          <td>
+            <img src="{{this.avatar}}" alt="avatar" width="30" height="30">
+          </td>
+        </tr>
         <tr id="nr{{this.iid}}">
             <td><p>#{{this.iid}} {{this.title}}</p></td>
             <td>
                 <form method="put" action="./{{this.iid}}/close">
                  <input type="hidden" name="_method" value="put">
-<input type="hidden" name="id" value="{{this.iid}}" />
-  <button type="submit">Close</button>
-</form>
+                <input type="hidden" name="id" value="{{this.iid}}" />
+                  <button type="submit">Close</button>
+                </form>
             </td>
+        </tr>
+         <tr>
+          <td><p>{{this.description}}</p></td>
         </tr>
         {{/if}}
         {{/each}}
@@ -37,18 +48,34 @@
 
 <template id="issue-template">   
       \{{#if this.state}}
+       <tr>
+          <td>
+            <img src="{{this.avatar}}" alt="avatar" width="30" height="30">
+          </td>
+        </tr>
         <tr>
             <td><p>#\{{this.iid}} \{{this.title}}</p></td>
             <td>
                 <a href=""><span>Reopen</span></a>
             </td>
         </tr>
+        <tr>
+          <td><p>{{this.description}}</p></td>
+        </tr>
         \{{else}}
+         <tr>
+          <td>
+            <img src="{{this.avatar}}" alt="avatar" width="30" height="30">
+          </td>
+        </tr>
         <tr>
             <td><p>#\{{this.iid}} \{{this.title}}</p></td>
             <td>
                 <a href=""><span>Close</span></a>
             </td>
+        </tr>
+         <tr>
+          <td><p>{{this.description}}</p></td>
         </tr>
       \{{/if}}
 </template>

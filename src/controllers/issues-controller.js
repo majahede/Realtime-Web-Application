@@ -79,4 +79,47 @@ export class IssuesController {
       res.redirect('..')
     }
   }
+
+  /**
+   * Reopen issue.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   *
+   */
+  async reopen (req, res) {
+    try {
+      await fetch(`${process.env.ISSUES_URL$}/${req.body.id}?state_event=reopen`, {
+        method: 'PUT',
+        headers: {
+          Authorization: process.env.BEARER,
+          'Content-Type': 'application/json'
+        }
+      })
+      res.redirect('.')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  /**
+   * Close issue.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   *
+   */
+  async close (req, res) {
+    try {
+      await fetch(`${process.env.ISSUES_URL$}/${req.body.id}?state_event=close`, {
+        method: 'PUT',
+        headers: {
+          Authorization: process.env.BEARER,
+          'Content-Type': 'application/json'
+        }
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }

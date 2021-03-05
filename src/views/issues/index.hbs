@@ -10,14 +10,22 @@
         <tr id="nr{{this.iid}}">
             <td><p>#{{this.iid}} {{this.title}}</p></td>
             <td>
-                <a href=""><span>Reopen</span></a>
+<form method="post" action="./{{this.iid}}/reopen">
+ <input type="hidden" name="_method" value="put">
+<input type="hidden" name="id" value="{{this.iid}}" />
+  <button type="submit">Reopen</button>
+</form>
             </td>
         </tr>
         {{else}}
         <tr id="nr{{this.iid}}">
             <td><p>#{{this.iid}} {{this.title}}</p></td>
             <td>
-                <a href=""><span>Close</span></a>
+                <form method="put" action="./{{this.iid}}/close">
+                 <input type="hidden" name="_method" value="put">
+<input type="hidden" name="id" value="{{this.iid}}" />
+  <button type="submit">Close</button>
+</form>
             </td>
         </tr>
         {{/if}}

@@ -24,7 +24,6 @@ export class HookController {
       avatar: req.body.user.avatar_url,
       state: req.body.object_attributes.closed_at
     }
-
     next()
   }
 

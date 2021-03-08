@@ -55,7 +55,7 @@ export class IssuesController {
         title: req.body.title,
         description: req.body.description,
         iid: req.body.iid,
-        avatar: req.avatar,
+        avatar: req.body.avatar,
         state: req.body.state
       }
 
@@ -72,7 +72,6 @@ export class IssuesController {
         res.status(200).send('Hook accepted')
         return
       }
-
       res.redirect('.')
     } catch (error) {
       console.log(error)
@@ -89,14 +88,14 @@ export class IssuesController {
    */
   async reopen (req, res) {
     try {
-      await fetch(`${process.env.ISSUES_URL$}/${req.body.id}?state_event=reopen`, {
+      await fetch(`${process.env.ISSUES_URL}/${req.body.id}?state_event=reopen`, {
         method: 'PUT',
         headers: {
           Authorization: process.env.BEARER,
           'Content-Type': 'application/json'
         }
       })
-      res.redirect('.')
+      res.redirect('..')
     } catch (error) {
       console.log(error)
     }
@@ -111,13 +110,14 @@ export class IssuesController {
    */
   async close (req, res) {
     try {
-      await fetch(`${process.env.ISSUES_URL$}/${req.body.id}?state_event=close`, {
+      await fetch(`${process.env.ISSUES_URL}/${req.body.id}?state_event=close`, {
         method: 'PUT',
         headers: {
           Authorization: process.env.BEARER,
           'Content-Type': 'application/json'
         }
       })
+      res.redirect('..')
     } catch (error) {
       console.log(error)
     }

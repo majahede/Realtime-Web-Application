@@ -1,9 +1,10 @@
-tbody {
-  border-bottom: 2px solid black;
 
+.issue-title {
+  font-weight: bold;
+  font-size: 18px;
 }
 
-table {
-  border-collapse: collapse;
-  padding: 50px;
+.closed-issue {
+  color:rgb(197, 197, 197);
 }
+

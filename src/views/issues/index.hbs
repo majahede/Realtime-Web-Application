@@ -1,89 +1,98 @@
-<h1>
-  Real-time web application
-</h1>
+<h2>
+  Issues Assignment B2
+</h2>
 
 <table id="issue-list">
-        {{#if viewData}}
-        {{#each viewData}}
-        {{#if this.state}}
-        <tr>
-          <td>
-            <img src="{{this.avatar}}" alt="avatar" width="30" height="30">
-          </td>
-        </tr>
+  {{#if viewData}}
+  {{#each viewData}}
+  {{#if this.state}}
     <tbody id="nr{{this.iid}}" class="closed-issue">
-        <tr>
-            <td class="issue-title"><p>#{{this.iid}} {{this.title}}</p></td>
-            <td>
-              <form method="post" action="./{{this.iid}}/reopen">
-              <input type="hidden" name="id" value="{{this.iid}}" />
-                <button type="submit">Reopen</button>
-              </form>
-            </td>
-        </tr>
-        <tr>
-          <td class="description"><p>{{this.description}}</p></td>
-        </tr>
-        </tbody>
-        {{else}}
-          <tr>
+      <tr>
+        <td>
+          <img src="{{this.avatar}}" alt="avatar" width="30" height="30">
+        </td>
+      </tr>
+      <tr>
+        <td class="issue-title"><p>#{{this.iid}} {{this.title}}</p></td>
           <td>
-            <img src="{{this.avatar}}" alt="avatar" width="30" height="30">
+            <form method="post" action="./{{this.iid}}/reopen">
+              <input type="hidden" name="id" value="{{this.iid}}" />
+              <button type="submit" class="open-btn">Reopen issue</button>
+            </form>
           </td>
-        </tr>
- <tbody id="nr{{this.iid}}" class="opened-issue">
-        <tr id="nr{{this.iid}}">
-            <td class="issue-title"><p>#{{this.iid}} {{this.title}}</p></td>
-            <td>
-                <form method="post" action="./{{this.iid}}/close">
-                <input type="hidden" name="id" value="{{this.iid}}" />
-                  <button type="submit">Close</button>
-                </form>
-            </td>
-        </tr>
-         <tr>
-          <td class="description"><p>{{this.description}}</p></td>
-        </tr>
+      </tr>
+      <tr>
+        <td class="description"><p>{{this.description}}</p></td>
+      </tr>
     </tbody>
-      {{/if}}
-        {{/each}}
-        {{/if}}
+        {{else}}
+    <tbody id="nr{{this.iid}}" class="opened-issue">
+      <tr>
+        <td>
+          <img src="{{this.avatar}}" alt="avatar" width="30" height="30">
+        </td>
+      </tr>
+      <tr>
+        <td class="issue-title"><p>#{{this.iid}} {{this.title}}</p></td>
+        <td>
+          <form method="post" action="./{{this.iid}}/close">
+            <input type="hidden" name="id" value="{{this.iid}}" />
+            <button type="submit" class="close-btn">Close issue</button>
+          </form>
+        </td>
+      </tr>
+      <tr>
+        <td class="description"><p>{{this.description}}</p></td>
+      </tr>
+    </tbody>
+  {{/if}}
+  {{/each}}
+  {{/if}}
 </table>
 
 
-<template id="issue-template">   
-      \{{#if this.state}}
-      <tbody id="nr\{{this.iid}}" class="closed-issue">
-        <tr>
-            <td class="issue-title"><p>#\{{this.iid}} \{{this.title}} </p></td>
-            <td>
-              <form method="post" action="./\{{this.iid}}/reopen">
-              <input type="hidden" name="id" value="\{{this.iid}}" />
-                <button type="submit">Reopen</button>
-              </form>
-            </td>
-        </tr>
-        <tr>
-          <td class="description"><p>\{{this.description}}</p></td>
-        </tr>
-        </tbody>
+<template id="issue-template"> 
+  \{{#if this.state}}
+    <tbody id="nr\{{this.iid}}" class="closed-issue">
+      <tr>
+        <td>
+          <img src="\{{this.avatar}}" alt="avatar" width="30" height="30">
+        </td>
+      </tr>
+      <tr>
+        <td class="issue-title"><p>#\{{this.iid}} \{{this.title}} </p></td>
+        <td>
+          <form method="post" action="./\{{this.iid}}/reopen">
+            <input type="hidden" name="id" value="\{{this.iid}}" />
+            <button type="submit" class="open-btn">Reopen issue</button>
+          </form>
+        </td>
+      </tr>
+      <tr>
+        <td class="description"><p>\{{this.description}}</p></td>
+      </tr>
+    </tbody>
         \{{else}}
-         <tbody id="nr\{{this.iid}}" class="opened-issue">
-        </tr>
-        <tr>
-            <td class="issue-title"><p>#\{{this.iid}} \{{this.title}}</p></td>
-            <td>
-                <form method="post" action="./\{{this.iid}}/close">
-                <input type="hidden" name="id" value="\{{this.iid}}" />
-                  <button type="submit">Close</button>
-                </form>
-            </td>
-        </tr>
-         <tr>
-          <td class="description"><p>\{{this.description}}</p></td>
-        </tr>
-        </tbody>
-      \{{/if}}
+    <tbody id="nr\{{this.iid}}" class="opened-issue">
+      <tr>
+        <td>
+          <img src="\{{this.avatar}}" alt="avatar" width="30" height="30">
+        </td>
+      </tr>
+      <tr>
+        <td class="issue-title"><p>#\{{this.iid}} \{{this.title}}</p></td>
+        <td>
+          <form method="post" action="./\{{this.iid}}/close">
+            <input type="hidden" name="id" value="\{{this.iid}}" />
+            <button type="submit" class="close-btn">Close issue</button>
+          </form>
+        </td>
+      </tr>
+      <tr>
+        <td class="description"><p>\{{this.description}}</p></td>
+      </tr>
+    </tbody>
+  \{{/if}}
 </template>
 
 

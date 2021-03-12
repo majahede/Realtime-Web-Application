@@ -10,7 +10,7 @@
  */
 export class HookController {
   /**
-   * Recieves a Webhook, validates it and sends it to Issues Create Controller.
+   * Recieves a Webhook, validates it and sends it to Issues Controller.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.

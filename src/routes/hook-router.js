@@ -14,4 +14,4 @@ export const router = express.Router()
 const controller = new HookController()
 const issuesController = new IssuesController()
 
-router.post('/issue', controller.authorize, controller.index, issuesController.create)
+router.post('/issue', controller.authorize, controller.index, issuesController.viewIssue)

@@ -53,13 +53,20 @@ export class IssuesController {
    * @param {Function} next - Express next middleware function.
    *
    */
-  async create (req, res, next) {
+  async viewIssue (req, res, next) {
     try {
+      const getIssue = await fetch(`${process.env.ISSUES_URL}/${req.body.iid}`, {
+        headers: {
+          Authorization: process.env.BEARER
+        }
+      })
+      const reqIssue = await getIssue.json()
+
       const issue = {
         title: req.body.title,
         description: req.body.description,
         iid: req.body.iid,
-        avatar: req.body.avatar,
+        avatar: reqIssue.author.avatar_url,
         state: req.body.state
       }
 
@@ -76,10 +83,9 @@ export class IssuesController {
         res.status(200).send('Hook accepted')
         return
       }
-      res.redirect('.')
+      // res.redirect('.')
     } catch (error) {
       next(error)
-      res.redirect('..')
     }
   }
 

@@ -1,6 +1,7 @@
 import express from 'express'
 import hbs from 'express-hbs'
 import http from 'http'
+import helmet from 'helmet'
 import logger from 'morgan'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
@@ -17,6 +18,18 @@ const main = async () => {
     const directoryFullName = dirname(fileURLToPath(import.meta.url))
 
     const baseURL = process.env.BASE_URL || '/'
+
+    // Set HTTP headers.
+    app.use(helmet())
+    app.use(
+      helmet.contentSecurityPolicy({
+        directives: {
+          ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+          'img-src': ["'self'", 'secure.gravatar.com'],
+          'script-src': ["'self'", "'unsafe-eval'", 'cdn.jsdelivr.net']
+        }
+      })
+    )
 
     // Set up morgan logger.
     app.use(logger('dev'))

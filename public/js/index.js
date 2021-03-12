@@ -23,7 +23,7 @@ if (issueTemplate) {
       tbody.classList.add('opened-issue')
     }
     const issueList = document.querySelector('#issue-list')
-
+    console.log(arg.avatar)
     if (tablebody) {
       issueList.replaceChild(tbody, tablebody)
     } else {

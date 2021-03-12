@@ -2,9 +2,17 @@
 .issue-title {
   font-weight: bold;
   font-size: 18px;
+  margin: 0;
+  padding: 0;
 }
 
 .closed-issue {
   color:rgb(197, 197, 197);
 }
+
+.description {
+  border-bottom: 1px solid black;
+  padding-bottom: 10px;
+}
+
 

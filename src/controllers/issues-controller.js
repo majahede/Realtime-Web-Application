@@ -19,37 +19,41 @@ export class IssuesController {
    * @param {Function} next - Express next middleware function.
    */
   async index (req, res, next) {
-    try {
-      const getIssues = await fetch(process.env.ISSUES_URL, {
-        headers: {
-          Authorization: process.env.BEARER
-        }
-      })
+    const getIssues = await fetch(process.env.ISSUES_URL, {
+      headers: {
+        Authorization: process.env.BEARER
+      }
+    })
+    const issues = await getIssues.json()
 
-      const issues = await getIssues.json()
+    if (issues.message) {
+      const error = new Error('Not Found')
+      error.status = 404
 
-      const viewData = issues.map(issue => ({ // Transform to object.
-        title: issue.title,
-        description: issue.description,
-        iid: issue.iid,
-        avatar: issue.author.avatar_url,
-        state: issue.closed_by
-      }))
-
-      res.render('issues/index', { viewData })
-    } catch (error) {
       next(error)
+      return
     }
+
+    const viewData = issues.map(issue => ({ // Transform to object.
+      title: issue.title,
+      description: issue.description,
+      iid: issue.iid,
+      avatar: issue.author.avatar_url,
+      state: issue.closed_by
+    }))
+
+    res.render('issues/index', { viewData })
   }
 
   /**
-   * Create new isssue.
+   * Send new or update issue to all subscribers.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
    *
    */
-  async create (req, res) {
+  async create (req, res, next) {
     try {
       const issue = {
         title: req.body.title,
@@ -74,7 +78,7 @@ export class IssuesController {
       }
       res.redirect('.')
     } catch (error) {
-      console.log(error)
+      next(error)
       res.redirect('..')
     }
   }
@@ -84,21 +88,28 @@ export class IssuesController {
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
    *
    */
-  async reopen (req, res) {
-    try {
-      await fetch(`${process.env.ISSUES_URL}/${req.body.id}?state_event=reopen`, {
-        method: 'PUT',
-        headers: {
-          Authorization: process.env.BEARER,
-          'Content-Type': 'application/json'
-        }
-      })
-      res.redirect('..')
-    } catch (error) {
-      console.log(error)
+  async reopen (req, res, next) {
+    const issue = await fetch(`${process.env.ISSUES_URL}/${req.body.id}?state_event=reopen`, {
+      method: 'PUT',
+      headers: {
+        Authorization: process.env.BEARER,
+        'Content-Type': 'application/json'
+      }
+    })
+    const body = await issue.json()
+
+    if (body.message) {
+      const error = new Error('Not Found')
+      error.status = 404
+
+      next(error)
+      return
     }
+
+    res.redirect('..')
   }
 
   /**
@@ -106,20 +117,26 @@ export class IssuesController {
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
    *
    */
-  async close (req, res) {
-    try {
-      await fetch(`${process.env.ISSUES_URL}/${req.body.id}?state_event=close`, {
-        method: 'PUT',
-        headers: {
-          Authorization: process.env.BEARER,
-          'Content-Type': 'application/json'
-        }
-      })
-      res.redirect('..')
-    } catch (error) {
-      console.log(error)
+  async close (req, res, next) {
+    const issue = await fetch(`${process.env.ISSUES_URL}/${req.body.id}?state_event=close`, {
+      method: 'PUT',
+      headers: {
+        Authorization: process.env.BEARER,
+        'Content-Type': 'application/json'
+      }
+    })
+    const body = await issue.json()
+
+    if (body.message) {
+      const error = new Error('Not Found')
+      error.status = 404
+
+      next(error)
+      return
     }
+    res.redirect('..')
   }
 }

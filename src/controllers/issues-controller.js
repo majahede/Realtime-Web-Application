@@ -83,7 +83,6 @@ export class IssuesController {
         res.status(200).send('Hook accepted')
         return
       }
-      // res.redirect('.')
     } catch (error) {
       next(error)
     }
